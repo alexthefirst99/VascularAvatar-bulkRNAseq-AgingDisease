@@ -1,0 +1,9 @@
+data/
+figures/
+*.h5ad
+*.zip
+*.fastq.gz
+*.csv
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
