@@ -29,22 +29,18 @@ Each notebook takes a processed Cufflinks/Cuffdiff FPKM matrix as input and repr
 
 ### `notebooks/Fig1E_HAEC_inflammation_heatmap.ipynb` — Figure 1E
 Row-normalized, hierarchically-clustered heatmap of inflammation-associated marker genes across primary HAEC at day 0, day 40 (control medium), and day 40 + VEGF.
-- **Input**: `Fig1E_HAEC_FPKM.csv` (3 samples: `D0`, `D40_Ctrl`, `D40_VEGF`)
 - **Pipeline**: log10(FPKM+1) on the curated marker panel → row min-max normalization → hierarchical clustering of genes (samples kept in chronological order)
 
 ### `notebooks/Fig2D_iPSC_EC_UMAP.ipynb` — Figure 2D
 PCA + UMAP of iPSC-derived EC across the 9 differentiation/maintenance conditions (VSL and its variants) at day 0 and day 40.
-- **Input**: `Fig2D_iPSC_EC_FPKM.csv` (27 samples, 9 conditions × 3 replicates)
 - **Pipeline**: log2(FPKM+1) → filter genes detected in ≥3 samples → top 1000 most-variable genes → PCA (centered, not scaled) → UMAP on the PCA coordinates
 
 ### `notebooks/Fig4A_VSMC_UMAP.ipynb` — Figure 4A
 PCA + UMAP of iPSC-derived VSMC across the VSL protocol and its variants (FGF-depleted, 8Br-cAMP, PDGF inhibitor, mVSL) vs. day 0 and day 40 controls.
-- **Input**: `Fig4A_VSMC_FPKM.csv` (11 samples, 7 conditions)
 - **Pipeline**: same as Figure 2D above
 
 ### `notebooks/iPSC_EC_Day60_marker_violin.ipynb` — iPSC-EC day 60 marker violins
 Violin plots of six endothelial and six fibroblast markers across the two day-60 iPSC-EC media conditions, with the three biological replicates overlaid as dots.
-- **Input**: `all_samples_old_and_new.csv` (batch 1/2), `IPSC_DAY60_batch3_expression_all_genes.csv` (batch 3), `IPSC_EC_highly_variable_genes.csv` (6 samples plotted, 2 conditions × 3 replicates)
 - **Pipeline**: concatenate batch 1/2 + batch 3 → filter genes detected in ≥3 samples → total-count normalization to 10,000 per sample → log1p → restrict to the highly-variable gene list → marker panel → pool replicates per condition
 - **Statistics**: two-sided Welch t-test, n = 3 vs. n = 3. Only *CD34* reaches p < 0.05 (p = 0.036) and no gene survives multiple-testing correction across the twelve markers, so the brackets are descriptive. `SHOW_STATS = False` omits them.
 
