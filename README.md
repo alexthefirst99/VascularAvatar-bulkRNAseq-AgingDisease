@@ -41,10 +41,8 @@ PCA + UMAP of iPSC-derived VSMC across the VSL protocol and its variants (FGF-de
 
 ### `notebooks/iPSC_EC_Day60_marker_violin.ipynb` — iPSC-EC day 60 marker violins
 Violin plots of six endothelial and six fibroblast markers across the two day-60 iPSC-EC media conditions, with the three biological replicates overlaid as dots.
-- **Pipeline**: filter genes detected in ≥3 samples → total-count normalization to 10,000 per sample → log1p → marker panel → pool replicates per condition
+- **Pipeline**: index by `gene_official` (first entry for duplicate symbols) → select the two day-60 conditions and the curated marker panel → log10(FPKM+1) → pool replicates per condition
 - **Statistics**: Cuffdiff v2.2.1 for this comparison (`sample1.vs.sample3`), n = 3 biological replicates per condition. Nominal (uncorrected) p-values are shown for this pre-specified marker panel. `SHOW_STATS = False` omits the brackets.
-
-Note this notebook uses log1p of total-count-normalized values, not log2/log10(FPKM+1) as above, so its y-axis is a log-normalized expression value.
 
 ---
 
@@ -70,8 +68,7 @@ Raw FASTQ files and processed FPKM matrices are available at NCBI GEO (accession
 
 ```
 python >= 3.9
-packages: pandas, numpy, scipy, scikit-learn, umap-learn, matplotlib, seaborn, nbformat
-marker violin notebook also requires: scanpy, anndata
+packages: pandas, numpy, scikit-learn, umap-learn, matplotlib, seaborn, nbformat
 ```
 
 ---
