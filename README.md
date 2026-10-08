@@ -19,7 +19,8 @@ Each notebook takes a processed Cufflinks/Cuffdiff FPKM matrix as input and repr
 └── notebooks/
     ├── Fig1E_HAEC_inflammation_heatmap.ipynb   — Figure 1E
     ├── Fig2D_iPSC_EC_UMAP.ipynb                — Figure 2D
-    └── Fig4A_VSMC_UMAP.ipynb                   — Figure 4A
+    ├── Fig4A_VSMC_UMAP.ipynb                   — Figure 4A
+    └── iPSC_EC_Day60_marker_violin.ipynb       — iPSC-EC day 60 marker violins
 ```
 
 ---
@@ -40,6 +41,14 @@ PCA + UMAP of iPSC-derived EC across the 9 differentiation/maintenance condition
 PCA + UMAP of iPSC-derived VSMC across the VSL protocol and its variants (FGF-depleted, 8Br-cAMP, PDGF inhibitor, mVSL) vs. day 0 and day 40 controls.
 - **Input**: `Fig4A_VSMC_FPKM.csv` (11 samples, 7 conditions)
 - **Pipeline**: same as Figure 2D above
+
+### `notebooks/iPSC_EC_Day60_marker_violin.ipynb` — iPSC-EC day 60 marker violins
+Violin plots of six endothelial and six fibroblast markers across the two day-60 iPSC-EC media conditions, with the three biological replicates overlaid as dots.
+- **Input**: `all_samples_old_and_new.csv` (batch 1/2), `IPSC_DAY60_batch3_expression_all_genes.csv` (batch 3), `IPSC_EC_highly_variable_genes.csv` (6 samples plotted, 2 conditions × 3 replicates)
+- **Pipeline**: concatenate batch 1/2 + batch 3 → filter genes detected in ≥3 samples → total-count normalization to 10,000 per sample → log1p → restrict to the highly-variable gene list → marker panel → pool replicates per condition
+- **Statistics**: two-sided Welch t-test, n = 3 vs. n = 3. Only *CD34* reaches p < 0.05 (p = 0.036) and no gene survives multiple-testing correction across the twelve markers, so the brackets are descriptive. `SHOW_STATS = False` omits them.
+
+Note this notebook uses log1p of total-count-normalized values, not log2/log10(FPKM+1) as above, so its y-axis is a log-normalized expression value. The batch 1/2 matrix is required even though only day-60 samples are plotted, because per-sample normalization totals are computed over the genes retained across all samples.
 
 ---
 
@@ -65,7 +74,8 @@ Raw FASTQ files and processed FPKM matrices are available at NCBI GEO (accession
 
 ```
 python >= 3.9
-packages: pandas, numpy, scikit-learn, umap-learn, matplotlib, seaborn, nbformat
+packages: pandas, numpy, scipy, scikit-learn, umap-learn, matplotlib, seaborn, nbformat
+marker violin notebook also requires: scanpy, anndata
 ```
 
 ---
