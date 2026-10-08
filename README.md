@@ -20,7 +20,7 @@ Each notebook takes a processed Cufflinks/Cuffdiff FPKM matrix as input and repr
     ├── Fig1E_HAEC_inflammation_heatmap.ipynb   — Figure 1E
     ├── Fig2D_iPSC_EC_UMAP.ipynb                — Figure 2D
     ├── Fig4A_VSMC_UMAP.ipynb                   — Figure 4A
-    └── iPSC_EC_Day60_marker_violin.ipynb       — iPSC-EC day 60 marker violins
+    └── iPSC_EC_marker_violin.ipynb             — iPSC-EC marker violins
 ```
 
 ---
@@ -39,9 +39,9 @@ PCA + UMAP of iPSC-derived EC across the 9 differentiation/maintenance condition
 PCA + UMAP of iPSC-derived VSMC across the VSL protocol and its variants (FGF-depleted, 8Br-cAMP, PDGF inhibitor, mVSL) vs. day 0 and day 40 controls.
 - **Pipeline**: same as Figure 2D above
 
-### `notebooks/iPSC_EC_Day60_marker_violin.ipynb` — iPSC-EC day 60 marker violins
-Violin plots of six endothelial and six fibroblast markers across the two day-60 iPSC-EC media conditions, with the three biological replicates overlaid as dots.
-- **Pipeline**: index by `gene_official` (first entry for duplicate symbols) → select the two day-60 conditions and the curated marker panel → log10(FPKM+1) → pool replicates per condition
+### `notebooks/iPSC_EC_marker_violin.ipynb` — iPSC-EC marker violins
+Violin plots of six endothelial and six fibroblast markers across the two iPSC-EC media conditions, with the three biological replicates overlaid as dots.
+- **Pipeline**: index by `gene_official` (first entry for duplicate symbols) → select the two media conditions and the curated marker panel → log10(FPKM+1) → pool replicates per condition
 - **Statistics**: Cuffdiff v2.2.1 for this comparison (`sample1.vs.sample3`), n = 3 biological replicates per condition. Nominal (uncorrected) p-values are shown for this pre-specified marker panel. `SHOW_STATS = False` omits the brackets.
 
 ---
