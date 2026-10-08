@@ -33,7 +33,7 @@ Row-normalized, hierarchically-clustered heatmap of inflammation-associated mark
 
 ### `notebooks/Fig2D_iPSC_EC_UMAP.ipynb` — Figure 2D
 PCA + UMAP of iPSC-derived EC across the 9 differentiation/maintenance conditions (VSL and its variants) at day 0 and day 40.
-- **Pipeline**: log2(FPKM+1) → filter genes detected in ≥3 samples → top 1000 most-variable genes → PCA (centered, not scaled) → UMAP on the PCA coordinates
+- **Pipeline**: log10(FPKM+1) → filter genes detected in ≥3 samples → top 1000 most-variable genes → PCA (centered, not scaled) → UMAP on the PCA coordinates
 
 ### `notebooks/Fig4A_VSMC_UMAP.ipynb` — Figure 4A
 PCA + UMAP of iPSC-derived VSMC across the VSL protocol and its variants (FGF-depleted, 8Br-cAMP, PDGF inhibitor, mVSL) vs. day 0 and day 40 controls.
@@ -50,7 +50,7 @@ Violin plots of six endothelial and six fibroblast markers across the two day-60
 
 Standard bulk RNA-seq exploratory-analysis workflow, in Python (`pandas` / `numpy` / `scikit-learn` / `umap-learn`):
 
-1. log2(FPKM + 1).
+1. log10(FPKM + 1).
 2. Keep genes detected (FPKM > 0) in at least 3 samples.
 3. Top 1000 most-variable genes across samples.
 4. PCA, mean-centered but not scaled to unit variance.
